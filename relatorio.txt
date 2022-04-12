@@ -1,0 +1,71 @@
+Segunda fase TECPROG 2019
+Nome: Henrique Suzuki                 NUSP: 10297626
+Nome: Raul dos Reis Soares            NUSP:  8535596
+Nome: Isis Ardisson Logullo           NUSP:  7577410
+
+
+EP SPACE WAR
+
+Para compilar o programa: gcc orbit.c spaceLib.c spaceLib.h graphic.h graphic.c control.h control.c xwc.c xwc.h -Wall -O -lX11 -lXpm -lm -o SpaceWar
+Para execultar o programa: ./SpaceWar <nome do arquivo de entrada>
+
+>>   PRIMEIRA FASE:
+O objetivo dessa primeira fase é construir o cenário base do jogo com o planeta exercendo influência
+gravitacional sobre as naves e os projéteis.
+Organizamos cada elemento da cena como um objeto com suas informações.
+Criamos uma cena com todos os objetos e calculamos a gravidade que o planeta exerce nas naves e nos 
+projéteis. Como essa interação acontece repetidas vezes usamos uma lista no algoritmo para simplificar 
+a atualização. Como os projéteis tem tempo de vida e limitação de quantidade, usando os nós da lista, 
+conseguimos controlar essa atualização de forma simples e eficiente.
+Usamos variáveis double por conta do tamanho dos numeros utilizados.
+Fizemos os cálculos separados para facilitar sua chamada em varios objetos.
+Temos o cálculo gravitacional e o cálculo de influência em cada objeto.
+Pelo menos por enquanto desconsideramos a interação gravitacional entre os objetos que não são o planeta,
+já que a massa é tão pequena que a força resultante acaba sendo desprezível.
+Usamos o método de Euler para modelar o movimento iterativamente sobre a força gravitacional. 
+Assim conseguimos a posição com influência da gravidade a cada intervalo de tempo necessário para
+atualizar as naves e os projéteis.
+
+Os arquivos criados são:
+-orbit.c 
+-spaceLib.c
+-spaceLib.h 
+
+Dificuldades encontradas:
+-Organização do tempo do grupo;
+-Dificuldade em entender as dimensões das grandezas.
+
+>>   SEGUNDA FASE:
+O objetivo desta fase é mostrar na tela, com animação, o movimento das naves e projéteis calculados com as rotinas da fase 1.
+Para esta fase foi criada a biblioteca graphic.h para abstrair as ações relacioandas à parte gráfica: criar a janela, ler os
+arquivos das imagens e plotar as imgans na janela. Foi decidido colocar todas as imagens em uma pasta e Lê-las com a função
+ReadPic. Foi decidido colocar uma tela inicial de carregamento em detrimento da demora para carregar todas as imagens
+necessárias. A partir daí a funcão que atualiza as posições da biblioteca spaceLib.h foi alterada para utilizar as funções de
+graphic.h para poltar iterativamente a posição atual de cada objeto. Assim foi possível tornar visual o efeito das funções
+implementadas na primeira fase. Nota-se que quando as funções gráficas são utilizadas, o programa não encerra no terminal
+(fazendo uso de ctrl+C parab tal),o que torna a correção disto um dos objetivos para a próxima fase do projeto, junto com a
+criação da superfície toroidal e a verificação de colisões.
+
+Os arquivos criados: 
+-xwc.h
+-xwc.c
+-graphic.c
+-graphic.h
+-images (pasta)
+
+Os arquivos alterados: 
+- spaceLib.c
+
+Dificuldades encontradas:
+- Organização do tempo do grupo;
+- Manipular a biblioteca gráfica;
+- Aplicar máscara para as imagens transparentes xpm;
+- Entender o porquê o programa não encerra quando utilizada a biblioteca gráfica;
+- Criar superfície toroidal com os dados de entrada em dimensões astronômicas;
+- Plotar as imagens em um sistema de coordenadas diferentes (Não admitindo posições negativas nos eixos).
+
+Para a próxima fase:
+- Criar superfície toroidal;
+- Tratamento de colisões;
+- Criar um Makefile;
+- Corrigir erro de encerramento do programa.
